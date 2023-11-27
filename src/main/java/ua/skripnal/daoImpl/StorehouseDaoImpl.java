@@ -1,5 +1,6 @@
 package ua.skripnal.daoImpl;
 
+import org.apache.log4j.Logger;
 import ua.skripnal.dao.StorehouseDao;
 import ua.skripnal.model.Storehouse;
 
@@ -18,17 +19,22 @@ public class StorehouseDaoImpl implements StorehouseDao {
     private final String INSERT = "insert into storehouse(product_id, count) values (?,?)";
     private final String UPDATEBYPRODUCTID = "update storehouse set count=? where product_id=?";
     private final String DELETEPRODUCTBYID = "delete from storehouse where product_id=?";
+
+    private static Logger LOGGER = Logger.getLogger(StorehouseDaoImpl.class);
+
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public StorehouseDaoImpl(Connection connection) {
+        LOGGER.info("StorehouseDaoImpl -> constructor");
         this.connection = connection;
     }
 
     @Override
     public Optional<Storehouse> readProductById(int productId) {
         try {
+            LOGGER.info("StorehouseDaoImpl -> readProductById");
             preparedStatement = connection.prepareStatement(READPRODUCTBYID);
             preparedStatement.setInt(1,productId);
             resultSet = preparedStatement.executeQuery();
@@ -37,6 +43,7 @@ public class StorehouseDaoImpl implements StorehouseDao {
                         resultSet.getInt("count")));
             }
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
         return Optional.empty();
@@ -45,6 +52,7 @@ public class StorehouseDaoImpl implements StorehouseDao {
     @Override
     public List<Storehouse> readAll() {
         try {
+            LOGGER.info("StorehouseDaoImpl -> readAll");
             preparedStatement = connection.prepareStatement(READALL);
             List<Storehouse> storehouseList = new ArrayList<>();
             resultSet = preparedStatement.executeQuery();
@@ -54,6 +62,7 @@ public class StorehouseDaoImpl implements StorehouseDao {
             }
             return storehouseList;
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -61,11 +70,13 @@ public class StorehouseDaoImpl implements StorehouseDao {
     @Override
     public void insertProduct(int productId, int count) {
         try {
+            LOGGER.info("StorehouseDaoImpl -> insertProduct");
             preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setInt(1,productId);
             preparedStatement.setInt(2,count);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -73,11 +84,13 @@ public class StorehouseDaoImpl implements StorehouseDao {
     @Override
     public void updateByProductId(int productId, int count) {
         try {
+            LOGGER.info("StorehouseDaoImpl -> updateByProductId");
             preparedStatement = connection.prepareStatement(UPDATEBYPRODUCTID);
             preparedStatement.setInt(1, count);
             preparedStatement.setInt(2,productId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -85,10 +98,12 @@ public class StorehouseDaoImpl implements StorehouseDao {
     @Override
     public void deleteProductById(int productId) {
         try {
+            LOGGER.info("StorehouseDaoImpl -> deleteProductById");
             preparedStatement = connection.prepareStatement(DELETEPRODUCTBYID);
             preparedStatement.setInt(1, productId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }

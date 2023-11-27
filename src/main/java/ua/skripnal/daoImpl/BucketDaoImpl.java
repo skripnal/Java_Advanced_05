@@ -1,5 +1,7 @@
 package ua.skripnal.daoImpl;
 
+import org.apache.log4j.Logger;
+import ua.skripnal.Main;
 import ua.skripnal.dao.BucketDao;
 import ua.skripnal.model.Bucket;
 
@@ -17,17 +19,20 @@ public class BucketDaoImpl implements BucketDao {
     private final String INSERT = "insert into bucket(user_id, product_id) values(?,?)";
     private final String DELETEBYUSERID = "delete from bucket where user_id=? and product_id=?";
 
+    private static Logger LOGGER = Logger.getLogger(BucketDaoImpl.class);
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public BucketDaoImpl(Connection connection) {
+        LOGGER.info("BucketDaoImpl -> constructor");
         this.connection = connection;
     }
 
     @Override
     public List<Bucket> readAllByUserId(int userId) {
         try {
+            LOGGER.info("BucketDaoImpl -> readAllByUserId");
             preparedStatement = connection.prepareStatement(READBYUSERID);
             List<Bucket> list = new ArrayList<>();
             preparedStatement.setInt(1,userId);
@@ -39,6 +44,7 @@ public class BucketDaoImpl implements BucketDao {
             }
             return list;
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -46,6 +52,7 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public List<Bucket> readAll() {
         try {
+            LOGGER.info("BucketDaoImpl -> readAll");
             preparedStatement = connection.prepareStatement(READALL);
             List<Bucket> list = new ArrayList<>();
             resultSet = preparedStatement.executeQuery();
@@ -56,6 +63,7 @@ public class BucketDaoImpl implements BucketDao {
             }
             return list;
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -63,11 +71,13 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public void insertProductByUserId(int userId, int productId) {
         try {
+            LOGGER.info("BucketDaoImpl -> insertProductByUserId");
             preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2,productId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -75,11 +85,13 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public void deleteProductByUserId(int userId, int productId) {
         try {
+            LOGGER.info("BucketDaoImpl -> deleteProductByUserId");
             preparedStatement = connection.prepareStatement(DELETEBYUSERID);
             preparedStatement.setInt(1,userId);
             preparedStatement.setInt(2,productId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new RuntimeException(e);
         }
     }

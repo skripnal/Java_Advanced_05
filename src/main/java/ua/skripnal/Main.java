@@ -1,5 +1,8 @@
 package ua.skripnal;
 
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 import ua.skripnal.dao.BucketDao;
 import ua.skripnal.dao.ProductDao;
 import ua.skripnal.dao.StorehouseDao;
@@ -8,7 +11,6 @@ import ua.skripnal.daoImpl.BucketDaoImpl;
 import ua.skripnal.daoImpl.ProductDaoImpl;
 import ua.skripnal.daoImpl.StorehouseDaoImpl;
 import ua.skripnal.daoImpl.UserDaoImpl;
-import ua.skripnal.model.User;
 import ua.skripnal.service.BucketService;
 import ua.skripnal.service.ProductService;
 import ua.skripnal.service.StorehouseService;
@@ -26,6 +28,7 @@ public class Main {
     public static void main(String[] args) {
         Connection connection = ConnectionUtils.openConnection();
 
+
         UserDao userDao = new UserDaoImpl(connection);
         UserService userService = new UserServiceImpl(userDao);
 
@@ -38,6 +41,8 @@ public class Main {
 
         StorehouseDao storehouseDao = new StorehouseDaoImpl(connection);
         StorehouseService storehouseService = new StorehouseServiceImpl(storehouseDao);
+
+
 
     }
 }

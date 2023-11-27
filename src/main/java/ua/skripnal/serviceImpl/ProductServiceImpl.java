@@ -1,5 +1,6 @@
 package ua.skripnal.serviceImpl;
 
+import org.apache.log4j.Logger;
 import ua.skripnal.dao.ProductDao;
 import ua.skripnal.model.Product;
 import ua.skripnal.service.ProductService;
@@ -8,13 +9,16 @@ import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
+    private static Logger LOGGER = Logger.getLogger(ProductServiceImpl.class);
 
     public ProductServiceImpl(ProductDao productDao) {
+        LOGGER.info("ProductServiceImpl -> constructor");
         this.productDao = productDao;
     }
 
     @Override
     public void readById(int id) {
+        LOGGER.info("ProductServiceImpl -> readById");
         Optional<Product> optional = productDao.readById(id);
         if (optional.isPresent()){
             System.out.println(optional.get());
@@ -23,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void readAll() {
+        LOGGER.info("ProductServiceImpl -> readAll");
         for (Product product : productDao.readAll()){
             System.out.println(product);
         }
@@ -30,21 +35,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void insert(String name, String description, double price) {
+        LOGGER.info("ProductServiceImpl -> insert");
         productDao.insert(name, description,price);
     }
 
     @Override
     public void deleteById(int id) {
+        LOGGER.info("ProductServiceImpl -> deleteById");
         productDao.deleteById(id);
     }
 
     @Override
     public void updateProductById(int id, String name, String description, double price) {
+        LOGGER.info("ProductServiceImpl -> updateProductById");
         productDao.updateById(id, new Product(name,description,price));
     }
 
     @Override
     public void updateProductNameById(int id, String name) {
+        LOGGER.info("ProductServiceImpl -> updateProductNameById");
         Optional<Product> optional = productDao.readById(id);
         if (optional.isPresent()){
             Product product = optional.get();
@@ -55,6 +64,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProductDescriptionById(int id, String description) {
+        LOGGER.info("ProductServiceImpl -> updateProductDescriptionById");
         Optional<Product> optional = productDao.readById(id);
         if (optional.isPresent()){
             Product product = optional.get();
@@ -65,6 +75,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProductPriceById(int id, double price) {
+        LOGGER.info("ProductServiceImpl -> updateProductPriceById");
         Optional<Product> optional = productDao.readById(id);
         if (optional.isPresent()){
             Product product = optional.get();

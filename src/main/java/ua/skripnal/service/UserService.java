@@ -1,8 +1,13 @@
 package ua.skripnal.service;
 
+import ua.skripnal.model.User;
+
+import java.util.Optional;
+
 public interface UserService {
 
     void readById(int id);
+    Optional<User> readByEmail(String email);
     void readAll();
     void updateUserById(int id, String firstName, String lastName, String email, String password, String role);
     void updateUserFirstNameById(int id, String firstName);
