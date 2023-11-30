@@ -36,7 +36,8 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("registrationServlet -> doPost");
 
+        req.setCharacterEncoding("UTF-8");
         userService.insert(req.getParameter("firstName"), req.getParameter("lastName"), req.getParameter("email"), req.getParameter("password"), "user");
-        resp.sendRedirect("/login.jsp");
+        resp.getWriter().write("success");
     }
 }
