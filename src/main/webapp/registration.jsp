@@ -13,14 +13,12 @@
     <script src="js/LogReg.js"></script>
 </head>
 <body>
-<header class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+<header class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.jsp">LOGO</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+
+        <div class="" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto ">
                 <li class="nav-item">
                     <a class="nav-link mx-2" aria-current="page" href="login.jsp">Увійти</a>

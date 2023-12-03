@@ -16,8 +16,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="css/userPage.css">
+    <link rel="stylesheet" href="css/addProduct.css">
     <script src="js/sidebar.js"></script>
     <script src="js/logOut.js"></script>
+    <script src="js/addProduct.js"></script>
 </head>
 <body>
 <header id="wrapper" class="animate">
@@ -47,6 +49,30 @@
         </div>
     </nav>
 </header>
+<main>
+    <div class="addProduct-container mt-5">
+        <h2 class="text-center mb-4">Додати продукт</h2>
+
+        <form class="addProduct-form text-white" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Назва товару:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Опис товару:</label>
+                <textarea class="form-control text-area-height" id="description" name="description"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Ціна товару:</label>
+                <input type="text" class="form-control" id="price" name="price">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="addProduct">Додати</button>
+        </form>
+    </div>
+</main>
+
 </body>
 </html>
-
