@@ -5,6 +5,7 @@ import ua.skripnal.dao.ProductDao;
 import ua.skripnal.model.Product;
 import ua.skripnal.service.ProductService;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
@@ -17,20 +18,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void readById(int id) {
+    public Product readById(int id) {
         LOGGER.info("ProductServiceImpl -> readById");
         Optional<Product> optional = productDao.readById(id);
         if (optional.isPresent()){
-            System.out.println(optional.get());
-        }else System.out.println("Товару під таким ID не існує");
+            return optional.get();
+        }else throw new NullPointerException();
     }
 
     @Override
-    public void readAll() {
+    public List<Product> readAll() {
         LOGGER.info("ProductServiceImpl -> readAll");
-        for (Product product : productDao.readAll()){
-            System.out.println(product);
-        }
+        return productDao.readAll();
     }
 
     @Override

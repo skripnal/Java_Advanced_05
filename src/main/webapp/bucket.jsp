@@ -3,23 +3,18 @@
     User user = (User) session.getAttribute("user");
 %>
 
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web-site</title>
+    <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="css/userPage.css">
-    <link rel="stylesheet" href="css/addProduct.css">
+    <link rel="stylesheet" href="css/bucket.css">
     <script src="js/sidebar.js"></script>
     <script src="js/logOut.js"></script>
-    <script src="js/addProduct.js"></script>
+    <script src="js/bucket.js"></script>
 </head>
 <body>
 <header id="wrapper" class="animate">
@@ -56,30 +51,43 @@
         </div>
     </nav>
 </header>
-<main>
-    <div class="addProduct-container mt-5">
-        <h2 class="text-center mb-4">Додати продукт</h2>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Корзина</b></h4></div>
+                        <div class="col align-self-center text-right text-muted product-count"></div>
+                    </div>
+                </div>
+                <div class="bucket-products">
 
-        <form class="addProduct-form text-white" method="post">
-            <div class="mb-3">
-                <label for="name" class="form-label">Назва товару:</label>
-                <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+
+                <div class="back-to-shop"><a href="userPage.jsp">&leftarrow; Повернутися в магазин</a></div>
             </div>
-
-            <div class="mb-3">
-                <label for="description" class="form-label">Опис товару:</label>
-                <textarea class="form-control text-area-height" id="description" name="description"></textarea>
+            <div class="col-md-4 summary">
+                <div><h5><b>Сума</b></h5></div>
+                <hr>
+                <div class="row">
+                    <div class="col product-count" style="padding-left:0;"></div>
+                    <div class="col text-right bucket-price"></div>
+                </div>
+                <form>
+                    <p>Доставка</p>
+                    <select><option class="text-muted delivery-price"></option></select>
+                    <p>Промокод</p>
+                    <input id="code" placeholder="Введіть промокод">
+                </form>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">Сума</div>
+                    <div class="col text-right bucket-delivery-price">&#8372; 137.00</div>
+                </div>
+                <button class="btn">Замовити</button>
             </div>
+        </div>
 
-            <div class="mb-3">
-                <label for="price" class="form-label">Ціна товару:</label>
-                <input type="text" class="form-control" id="price" name="price">
-            </div>
-
-            <button type="submit" class="btn btn-primary" id="addProduct">Додати</button>
-        </form>
     </div>
-</main>
-
 </body>
 </html>

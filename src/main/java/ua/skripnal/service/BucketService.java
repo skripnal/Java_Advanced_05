@@ -1,8 +1,12 @@
 package ua.skripnal.service;
 
+import ua.skripnal.model.Bucket;
+
+import java.util.List;
+
 public interface BucketService {
 
-    void readAllByUserId(int userId);
+    List<Bucket> readAllByUserId(int userId);
     void readAll();
     void insertProductByUserId(int userId, int productId);
     void deleteProductByUserId(int userId, int productId);

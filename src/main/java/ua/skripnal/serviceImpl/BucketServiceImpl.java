@@ -6,6 +6,8 @@ import ua.skripnal.daoImpl.UserDaoImpl;
 import ua.skripnal.model.Bucket;
 import ua.skripnal.service.BucketService;
 
+import java.util.List;
+
 public class BucketServiceImpl implements BucketService {
     BucketDao bucketDao;
     private static Logger LOGGER = Logger.getLogger(BucketServiceImpl.class);
@@ -16,11 +18,9 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public void readAllByUserId(int userId) {
+    public List<Bucket> readAllByUserId(int userId) {
         LOGGER.info("BucketServiceImpl -> readAllByUserId");
-        for (Bucket bucket : bucketDao.readAllByUserId(userId)){
-            System.out.println(bucket);
-        }
+        return bucketDao.readAllByUserId(userId);
     }
 
     @Override
