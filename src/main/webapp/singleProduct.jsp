@@ -1,4 +1,5 @@
 <%@ page import="ua.skripnal.model.User" %>
+<%@ page import="ua.skripnal.eEnum.UserRole" %>
 <%
     User user = (User) session.getAttribute("user");
 %>
@@ -16,48 +17,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="css/singleProduct.css">
-    <script src="js/sidebar.js"></script>
-    <script src="js/logOut.js"></script>
     <script src="js/singleProduct.js"></script>
+
 </head>
 <body>
-<header id="wrapper" class="animate">
-    <nav class="navbar header-top fixed-top navbar-expand navbar-dark bg-dark">
-        <span class="ms-3 navbar-toggler-icon leftmenutrigger"></span>
+
+<% if (user == null) { %>
+<header class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">LOGO</a>
 
-        <div class="me-3 collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav animate side-nav bg-dark">
+
+        <div class="" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto ">
                 <li class="nav-item">
-                    <a class="nav-link" href="addProduct.jsp">Додати продукт</a>
+                    <a class="nav-link mx-2" aria-current="page" href="login.jsp">Увійти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="userPage.jsp">Продукти</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav margine-left d-md-flex">
-                <li class="nav-item dropdown margine-r-100">
-                    <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <%=user.getFirstName()%>
-                    </a>
-                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item bg-dark text-white" id="logOut" href="#">Вийти</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown margine-r-100 text-white">
-                    <a class="nav-link" href="bucket.jsp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                    </a>
+                    <a class="nav-link mx-2" href="registration.jsp">Зареєструватися</a>
                 </li>
             </ul>
         </div>
-    </nav>
-</header>
-<main>
-    <div class="single-page-product">
     </div>
-</main>
+</header>
+<% } else if (user.getRole().equals(UserRole.USER.toString())) { %>
+<jsp:include page="headers/userPageHeader.jsp"></jsp:include>
+<% } else if (user.getRole().equals(UserRole.ADMIN.toString())) { %>
+<jsp:include page="headers/adminPageHeader.jsp"></jsp:include>
+<% } %>
+
+
+
+
+<section class="single-product">
+    <div class="container py-5 ">
+
+    </div>
+</section>
 </body>
 </html>

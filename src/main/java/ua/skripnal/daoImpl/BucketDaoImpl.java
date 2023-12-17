@@ -18,6 +18,7 @@ public class BucketDaoImpl implements BucketDao {
     private final String READALL = "select * from bucket";
     private final String INSERT = "insert into bucket(user_id, product_id) values(?,?)";
     private final String DELETEBYUSERID = "delete from bucket where user_id=? and product_id=?";
+    private final String DELETE = "delete from bucket where id = ?";
 
     private static Logger LOGGER = Logger.getLogger(BucketDaoImpl.class);
     private Connection connection;
@@ -30,6 +31,17 @@ public class BucketDaoImpl implements BucketDao {
     }
 
     @Override
+    public void deleteProduct(int id) {
+        try {
+            preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public List<Bucket> readAllByUserId(int userId) {
         try {
             LOGGER.info("BucketDaoImpl -> readAllByUserId");
@@ -38,7 +50,8 @@ public class BucketDaoImpl implements BucketDao {
             preparedStatement.setInt(1,userId);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                list.add(new Bucket(resultSet.getInt("user_id"),
+                list.add(new Bucket(resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
                         resultSet.getInt("product_id"),
                         resultSet.getTimestamp("added_date").toLocalDateTime()));
             }
@@ -57,7 +70,8 @@ public class BucketDaoImpl implements BucketDao {
             List<Bucket> list = new ArrayList<>();
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                list.add(new Bucket(resultSet.getInt("user_id"),
+                list.add(new Bucket(resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
                         resultSet.getInt("product_id"),
                         resultSet.getTimestamp("added_date").toLocalDateTime()));
             }

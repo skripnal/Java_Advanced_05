@@ -3,22 +3,10 @@ package ua.skripnal;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import ua.skripnal.dao.BucketDao;
-import ua.skripnal.dao.ProductDao;
-import ua.skripnal.dao.StorehouseDao;
-import ua.skripnal.dao.UserDao;
-import ua.skripnal.daoImpl.BucketDaoImpl;
-import ua.skripnal.daoImpl.ProductDaoImpl;
-import ua.skripnal.daoImpl.StorehouseDaoImpl;
-import ua.skripnal.daoImpl.UserDaoImpl;
-import ua.skripnal.service.BucketService;
-import ua.skripnal.service.ProductService;
-import ua.skripnal.service.StorehouseService;
-import ua.skripnal.service.UserService;
-import ua.skripnal.serviceImpl.BucketServiceImpl;
-import ua.skripnal.serviceImpl.ProductServiceImpl;
-import ua.skripnal.serviceImpl.StorehouseServiceImpl;
-import ua.skripnal.serviceImpl.UserServiceImpl;
+import ua.skripnal.dao.*;
+import ua.skripnal.daoImpl.*;
+import ua.skripnal.service.*;
+import ua.skripnal.serviceImpl.*;
 import ua.skripnal.utils.ConnectionUtils;
 
 import java.sql.Connection;
@@ -42,6 +30,10 @@ public class Main {
         StorehouseDao storehouseDao = new StorehouseDaoImpl(connection);
         StorehouseService storehouseService = new StorehouseServiceImpl(storehouseDao);
 
+        ImagesDao imagesDao = new ImagesDaoImpl(connection);
+        ImagesService imagesService = new ImagesServiceImpl(imagesDao);
+
+        System.out.println(productService.readALLProductBucket(2));
 
 
     }

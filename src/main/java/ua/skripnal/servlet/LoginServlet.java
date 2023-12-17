@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.skripnal.dao.UserDao;
 import ua.skripnal.daoImpl.BucketDaoImpl;
 import ua.skripnal.daoImpl.UserDaoImpl;
+import ua.skripnal.eEnum.UserRole;
 import ua.skripnal.model.User;
 import ua.skripnal.service.UserService;
 import ua.skripnal.serviceImpl.UserServiceImpl;
@@ -44,9 +45,15 @@ public class LoginServlet extends HttpServlet {
             if (user.getPassword().equals(req.getParameter("password"))){
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                resp.getWriter().write("success");
+                session.setAttribute("status" , "log");
+                if (user.getRole().equals(UserRole.USER.toString())){
+                    resp.getWriter().write("user");
+                }else if (user.getRole().equals(UserRole.ADMIN.toString())){
+                    resp.getWriter().write("admin");
+                }
+
             }
-        }
+        }else resp.getWriter().write("error");
 
     }
 }

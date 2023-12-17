@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.skripnal.dao.UserDao;
 import ua.skripnal.daoImpl.BucketDaoImpl;
 import ua.skripnal.daoImpl.UserDaoImpl;
+import ua.skripnal.eEnum.UserRole;
 import ua.skripnal.service.UserService;
 import ua.skripnal.serviceImpl.UserServiceImpl;
 import ua.skripnal.utils.ConnectionUtils;
@@ -37,7 +38,7 @@ public class RegistrationServlet extends HttpServlet {
         LOGGER.info("registrationServlet -> doPost");
 
         req.setCharacterEncoding("UTF-8");
-        userService.insert(req.getParameter("firstName"), req.getParameter("lastName"), req.getParameter("email"), req.getParameter("password"), "user");
+        userService.insert(req.getParameter("firstName"), req.getParameter("lastName"), req.getParameter("email"), req.getParameter("password"), UserRole.USER.toString());
         resp.getWriter().write("success");
     }
 }

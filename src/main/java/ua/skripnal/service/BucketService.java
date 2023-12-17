@@ -10,4 +10,5 @@ public interface BucketService {
     void readAll();
     void insertProductByUserId(int userId, int productId);
     void deleteProductByUserId(int userId, int productId);
+    void deleteProduct(int id);
 }

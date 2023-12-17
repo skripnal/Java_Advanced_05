@@ -9,20 +9,37 @@ public class Product {
     private String name;
     private String description;
     private double price;
+    private String category;
+    private String subCategory;
     private LocalDateTime createDate;
+    private String imagePath;
 
-    public Product(int id, String name, String description, double price, LocalDateTime createDate) {
+    public Product(int id, String name, String description, double price, String category, String subCategory, LocalDateTime createDate, String imagePath) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
+        this.subCategory = subCategory;
         this.createDate = createDate;
+        this.imagePath = imagePath;
     }
 
-    public Product(String name, String description, double price) {
+    public Product(String name, String description, double price, String category, String subCategory, String imagePath) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.imagePath = imagePath;
+    }
+
+    public Product(String name, String description, double price, String category, String subCategory) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.subCategory = subCategory;
     }
 
     public int getId() {

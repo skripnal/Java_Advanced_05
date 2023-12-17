@@ -33,6 +33,11 @@ public class BuyProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        bucketService.insertProductByUserId(user.getId(), Integer.parseInt(req.getParameter("productIdAdd")));
+        if (user != null){
+            bucketService.insertProductByUserId(user.getId(), Integer.parseInt(req.getParameter("productIdAdd")));
+            resp.getWriter().write("success");
+        }else {
+            resp.getWriter().write("null");
+        }
     }
 }

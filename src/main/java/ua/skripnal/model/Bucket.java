@@ -5,11 +5,13 @@ import java.util.Objects;
 
 public class Bucket {
 
+    private int id;
     private int userId;
     private int productId;
     private LocalDateTime addedDate;
 
-    public Bucket(int userId, int productId, LocalDateTime addedDate) {
+    public Bucket(int id, int userId, int productId, LocalDateTime addedDate) {
+        this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.addedDate = addedDate;

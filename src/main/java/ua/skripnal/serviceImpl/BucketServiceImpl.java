@@ -42,4 +42,9 @@ public class BucketServiceImpl implements BucketService {
         LOGGER.info("BucketServiceImpl -> deleteProductByUserId");
         bucketDao.deleteProductByUserId(userId,productId);
     }
+
+    @Override
+    public void deleteProduct(int id) {
+        bucketDao.deleteProduct(id);
+    }
 }

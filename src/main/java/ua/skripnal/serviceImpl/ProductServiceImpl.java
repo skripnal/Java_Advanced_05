@@ -2,6 +2,7 @@ package ua.skripnal.serviceImpl;
 
 import org.apache.log4j.Logger;
 import ua.skripnal.dao.ProductDao;
+import ua.skripnal.model.CustomProductBucket;
 import ua.skripnal.model.Product;
 import ua.skripnal.service.ProductService;
 
@@ -18,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<CustomProductBucket> readALLProductBucket(int userId) {
+        return productDao.readALLProductBucket(userId);
+    }
+
+    @Override
     public Product readById(int id) {
         LOGGER.info("ProductServiceImpl -> readById");
         Optional<Product> optional = productDao.readById(id);
@@ -27,15 +33,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> readByCategory(String category, String subCategory) {
+        return productDao.readByCategory(category,subCategory);
+    }
+
+    @Override
     public List<Product> readAll() {
         LOGGER.info("ProductServiceImpl -> readAll");
         return productDao.readAll();
     }
 
     @Override
-    public void insert(String name, String description, double price) {
+    public void insert(String name, String description, double price, String category, String subCategory, String imagePath) {
         LOGGER.info("ProductServiceImpl -> insert");
-        productDao.insert(name, description,price);
+        productDao.insert(name, description,price, category, subCategory, imagePath);
     }
 
     @Override
@@ -45,9 +56,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProductById(int id, String name, String description, double price) {
+    public void updateProductById(int id, String name, String description, double price, String category, String subCategory) {
         LOGGER.info("ProductServiceImpl -> updateProductById");
-        productDao.updateById(id, new Product(name,description,price));
+        productDao.updateById(id, new Product(name,description,price, category, subCategory));
     }
 
     @Override
@@ -81,5 +92,10 @@ public class ProductServiceImpl implements ProductService {
             product.setPrice(price);
             productDao.updateById(id, product);
         }else System.out.println("Товару під таким ID не існує");
+    }
+
+    @Override
+    public String joinImageNameById(int productId) {
+        return productDao.joinImageNameById(productId);
     }
 }

@@ -10,4 +10,7 @@ public interface BucketDao {
     List<Bucket> readAll();
     void insertProductByUserId(int userId, int productId);
     void deleteProductByUserId(int userId, int productId);
+
+    void deleteProduct(int id);
+
 }
